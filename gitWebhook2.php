@@ -35,31 +35,32 @@ if (
 	die("No configuration for " . $payload['repository']['full_name'] . "/" . $payload['ref']);
 }
 
-//$changes = array("added" => array(), "removed" => array(), "modified" => array());
-for ($i = 0; $i < count($payload['commits']); $i++) {
-	$commit = $payload['commits'][$i];
-	echo "Commit: \"" . $commit['message'] . "\".\n";
-	echo "ID: " . $commit['id'] . "\n";
-	echo "Base URL: " . "https://raw.githubusercontent.com/" . $repConfig[4] . "/" . $longid . "/\n";
-	foreach ($commit['added'] as $add) {
-		echo "Added " . $add . "\n";
-	}
-	foreach ($commit['deleted'] as $add) {
-		echo "Deleted " . $add . "\n";
-	}
-	foreach ($commit['modified'] as $add) {
-		echo "Modified " . $add . "\n";
-	}
-	//$changes[] = array_merge($changes, $payload['commits'][$i]);
-}
 
-/*
 $conn = new ftp($repConfig[0]);
 $conn->ftp_login($repConfig[1], $repConfig[2]);
 $conn->ftp_pasv(true);
 $conn->ftp_chdir($repConfig[3]);
-$conn->ftp_mkdir("git_archives");
-$conn->ftp_mkdir("git_archives/" . $id);
+
+for ($i = 0; $i < count($payload['commits']); $i++) {
+	$commit = $payload['commits'][$i];
+	echo "Commit: \"" . $commit['message'] . "\".\n";
+	echo "ID: " . $commit['id'] . "\n";
+	echo "Base URL: " . "https://raw.githubusercontent.com/" . $repConfig[4] . "/" . $commit['id'] . "/\n";
+	foreach ($commit['added'] as $add) {
+		$conn->ftp_put($add, "https://raw.githubusercontent.com/" . $repConfig[4] . "/" . $commit['id'] . "/" . $add, FTP_BINARY);
+		echo "Added " . $add . "\n";
+	}
+	foreach ($commit['deleted'] as $del) {
+		$conn->ftp_delete($del);
+		echo "Deleted " . $del . "\n";
+	}
+	foreach ($commit['modified'] as $mod) {
+		$conn->ftp_put($mod, "https://raw.githubusercontent.com/" . $repConfig[4] . "/" . $commit['id'] . "/" . $mod, FTP_BINARY);
+		echo "Modified " . $mod . "\n";
+	}
+}
+
+$conn->ftp_close();
 
 /* Backup
 foreach(array('added', 'removed', 'modified') as $type) {
