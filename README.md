@@ -7,3 +7,13 @@ For example, the webhook will be able to update an FTP server from newly pushed 
 `gitWebhook2.php` is the current version of the webhook.
 
 The configuration array must be filled in the following way:
+$configs = array(
+	"<repo>" => array(
+		"refs/heads/<branch>" => array(
+			"<ftpserver>",
+			"<ftpusername>",
+			"<ftppassword>",
+			"<ftpbasedir>",
+			"<repo>",
+		)
+	),
