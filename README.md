@@ -6,16 +6,16 @@ Repository for testing git and webhooks.
 The configuration array must be filled in the following way:
 ```
 $configs = array(
-	"<repo>" => array(
+	"<user>/<repo>" => array(
 		"refs/heads/<branch>" => array(
 			"<ftpserver>",
 			"<ftpusername>",
 			"<ftppassword>",
 			"<ftpbasedir>",
-			"<repo>",
+			"<user>/<repo>",
 		),
 		"refs/heads/<branch>" => array(etc..)
 	),
-	"<repo>" => array(etc..)
+	"<user>/<repo>" => array(etc..)
 );
 ```
