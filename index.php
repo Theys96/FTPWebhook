@@ -1,18 +1,6 @@
 <?php
-class ftp {
-    public $conn;
-    public function __construct($url){
-        $this->conn = ftp_connect($url);
-    }
-    public function __call($func,$a){
-        if(strstr($func,'ftp_') !== false && function_exists($func)){
-            array_unshift($a,$this->conn);
-            return call_user_func_array($func,$a);
-        }else{
-            die("$func is not a valid FTP function");
-        }
-    }
-}
+require 'ftp.php'
+require 'config.php'
 
 function verifyDir($conn, $add) {
 	$dir = explode("/", $add);
@@ -23,8 +11,6 @@ function verifyDir($conn, $add) {
 		$conn->ftp_mkdir($makedir);
 	}
 }
-
-$configs = array();
 
 $payload = json_decode($_POST['payload'], true);
 $before = $payload['before'];
