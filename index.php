@@ -1,6 +1,6 @@
 <?php
-require 'ftp.php'
-require 'config.php'
+require 'ftp.php';
+require 'config.php';
 
 function verifyDir($conn, $add) {
 	$dir = explode("/", $add);
@@ -23,6 +23,7 @@ if (
 ) {
 	$repConfig = $configs[$payload['repository']['full_name']][$payload['ref']];
 } else {
+	http_response_code(404);
 	die("No configuration for " . $payload['repository']['full_name'] . "/" . $payload['ref']);
 }
 

@@ -1,7 +1,5 @@
 # FTP Webhook
-Repository for testing git and webhooks.
-
-`gitWebhook2.php` is the current version of the webhook.
+A web hook written in PHP that creates an endpoint for (GitHub) Webhooks. This way, for example, a web server can be updated (through FTP) by simply pushing to the master branch of a git reposity.
 
 The configuration array must be filled in the following way:
 ```
