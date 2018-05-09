@@ -11,6 +11,7 @@ $configs = array(
 			"<ftppassword>",
 			"<ftpbasedir>",
 			"<user>/<repo>",
+			"<secret>"
 		),
 		"refs/heads/<branch>" => array(etc..)
 	),
