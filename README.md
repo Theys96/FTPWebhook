@@ -10,18 +10,18 @@ To add a webhook to a repository, go to https://github.com/[user]/[repo]/setting
 The configuration array must be filled in the following way on the webhook server:
 ```
 $configs = array(
-	"<user>/<repo>" => array(
-		"refs/heads/<branch>" => array(
+    "<user>/<repo>" => array(
+        "refs/heads/<branch>" => array(
             "ftp_server" => "<ftpserver>",
             "ftp_username" => "<ftpusername>",
             "ftp_password" => "<ftppassword>",
             "ftp_basedir" => "<ftpbasedir>",
             "repo" => "<user>/<repo>",
             "secret" => "<secret>"
-		),
-		"refs/heads/<branch>" => array(etc..)
-	),
-	"<user>/<repo>" => array(etc..)
+        ),
+        "refs/heads/<branch>" => array(etc..)
+    ),
+    "<user>/<repo>" => array(etc..)
 );
 ```
 
